@@ -1,0 +1,2 @@
+sphinx-build -b html doc build/html
+python setup.py build_ext --inplace
