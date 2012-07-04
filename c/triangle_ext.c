@@ -1,23 +1,13 @@
-/*
- *  triangle_ext.c
- *  
- *
- *  Created by Dzhelil Rufat on Dec 26, 2009.
- *  Copyright 2009. All rights reserved.
- *
- */
-
 #include <Python.h>
 #include <numpy/arrayobject.h>
 
 #define VOID void
 #define REAL double
-#define ANSI_DECLARATORS
 #include "triangle.h"
 
 static PyObject *
-triangle_triangulate(PyObject *self, PyObject *args)
-{
+py_triangulate(PyObject *self, PyObject *args) {
+
     PyObject *pts;
     char *opts;
     PyObject *R;
@@ -32,7 +22,6 @@ triangle_triangulate(PyObject *self, PyObject *args)
         return NULL;
 
     PyObject *PTS, *TR;
-
     {
         // call the triangle library
         struct triangulateio in, out;
@@ -88,7 +77,7 @@ triangle_triangulate(PyObject *self, PyObject *args)
 };
 
 static PyMethodDef triangleMethods[] = {
-    {"triangulate", triangle_triangulate, METH_VARARGS, ""},
+    {"triangulate", py_triangulate, METH_VARARGS, ""},
     {NULL, NULL, 0, NULL}        /* Sentinel */
 };
 
@@ -97,7 +86,5 @@ initcore(void)
 {
     PyObject *m;
     Py_InitModule((char*)"core", triangleMethods);
-
-    // REQUIRED FOR NUMPY TO WORK CORRECTLY
     import_array();
 }

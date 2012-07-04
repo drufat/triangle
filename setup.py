@@ -11,6 +11,6 @@ setup(name='triangle',
       requires = ['numpy'],
       ext_modules=[Extension('triangle.core', ['c/triangle.c', 'c/triangle_ext.c'],
                              include_dirs = ['c', numpy.get_include()],
-                             define_macros = [('NO_TIMER', 1), ('TRILIBRARY', 1)]) 
-              ]
-      )
+                             define_macros = [('NO_TIMER', 1),
+                                              ('TRILIBRARY', 1),
+                                              ('ANSI_DECLARATORS', 1)])])
