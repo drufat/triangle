@@ -12,5 +12,3 @@ def plot(plt, pts, **kwargs):
     
     plt.subplot(122, sharex=ax1, sharey=ax1)
     plt.triplot(pnts[:,0], pnts[:,1], triangles,'bo-')
-
-
