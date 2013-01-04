@@ -1,15 +1,15 @@
 cmake_minimum_required(VERSION 2.6)
 
 add_definitions( 
-	-DNO_TIMER
-	-DNDEBUG
-	-DTRILIBRARY
+    -DVOID=int
+    -DREAL=double
+    -DNO_TIMER
+    -DANSI_DECLARATORS
 )
 
-add_library(triangle triangle.c)
+add_executable(tricall tricall.c triangle.c)
+target_link_libraries(tricall m)
+set_target_properties (tricall PROPERTIES COMPILE_DEFINITIONS "TRILIBRARY")
 
-add_executable(tricall tricall)
-target_link_libraries(tricall triangle)
-if (UNIX)
-    target_link_libraries(tricall m)
-endif(UNIX)
+add_executable(triangle triangle.c)
+target_link_libraries(triangle m)

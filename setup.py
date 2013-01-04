@@ -1,16 +1,26 @@
 import numpy
 from distutils.core import setup, Extension
+from Cython.Distutils import build_ext
+
+define_macros = [('VOID', 'int'),
+                 ('REAL', 'double'),
+                 ('NO_TIMER', 1),
+                 ('TRILIBRARY', 1),
+                 ('ANSI_DECLARATORS', 1)]
 
 setup(name='triangle',
-      packages=['triangle'],
-      version='2012.07.04',
-      description='Python binding to the triangle library',
-      author='Dzhelil Rufat',
-      author_email='drufat@caltech.edu',
-      url='http://drufat.github.com/triangle',
-      requires = ['numpy'],
-      ext_modules=[Extension('triangle.core', ['c/triangle.c', 'c/triangle_ext.c'],
-                             include_dirs = ['c', numpy.get_include()],
-                             define_macros = [('NO_TIMER', 1),
-                                              ('TRILIBRARY', 1),
-                                              ('ANSI_DECLARATORS', 1)])])
+    packages=['triangle'],
+    version='2012.07.04',
+    description='Python binding to the triangle library',
+    author='Dzhelil Rufat',
+    author_email='drufat@caltech.edu',
+    license='GNU GPLv3',
+    url='http://drufat.github.com/triangle',
+    requires = ['numpy'],
+    cmdclass = {'build_ext': build_ext},
+    ext_modules=[
+                 Extension('triangle.core', ['c/triangle.c', 'triangle/c_triangle.pxd', 'triangle/core.pyx'],
+                           include_dirs = ['c'],
+                           define_macros = define_macros)
+    ]
+)
