@@ -30,6 +30,7 @@ extensions = [
           'matplotlib.sphinxext.plot_directive',
           'sphinx.ext.autodoc',
           'sphinx.ext.doctest',
+          'sphinx.ext.todo',
           ]
 
 
@@ -47,7 +48,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'triangle'
-copyright = u'2012, Dzhelil Rufat'
+copyright = u'2012, Triangle Authors, Dzhelil Rufat'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -159,7 +160,7 @@ html_static_path = ['_static']
 #html_show_sphinx = True
 
 # If true, "(C) Copyright ..." is shown in the HTML footer. Default is True.
-html_show_copyright = False
+html_show_copyright = True
 
 # If true, an OpenSearch description file will be output, and all pages will
 # contain a <link> tag referring to it.  The value of this option must be the

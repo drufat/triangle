@@ -8,31 +8,37 @@ Python Triangle
 
 *Python Triangle* is a python wrapper around Jonathan Richard Shewchuk's
 two-dimensional quality mesh generator and delaunay triangulator library,
-available `here <http://www.cs.cmu.edu/~quake/triangle.html>`_ . The
-documentation and examples in the aforementioned site have been modified to
-make them applicable to python, and working source code is also provided. 
+available `here <http://www.cs.cmu.edu/~quake/triangle.html>`_. 
 
 .. toctree::
    :maxdepth: 2
 
    installing.rst
    definitions.rst
-   quality.rst
-   convex.rst
    delaunay.rst
-   examples.rst
+   quality.rst
    refine.rst
+   convex.rst
+   voronoi.rst
+   examples.rst
+   data.rst
    
 API
 ===
 
-.. autofunction:: triangle.triangulate
-
-.. autofunction:: triangle.triangulate1
-
 .. autofunction:: triangle.convex_hull
 
+.. autofunction:: triangle.delaunay
+
 .. autofunction:: triangle.voronoi
+
+.. autofunction:: triangle.triangulate
+
+.. autofunction:: triangle.loads
+
+.. autofunction:: triangle.load
+
+.. autofunction:: triangle.get_data
     		
 Indices and tables
 ==================

@@ -56,6 +56,7 @@ cdef class TriangulateIO:
             return <int[:self.c.numberoftriangles*self.c.numberofcorners]> self.c.trianglelist
         def __set__(self, int[:] value):
             replace_i(&(self.c.trianglelist), value)
+            self.c.numberofcorners = 3
             self.c.numberoftriangles = value.size/self.c.numberofcorners
     
     property triangleattributelist:
@@ -67,10 +68,10 @@ cdef class TriangulateIO:
 
     property trianglearealist:
         def __get__(self):
-            return <double[:self.c.numberoftriangleattributes]> self.c.triangleattributelist
+            return <double[:self.c.numberoftriangleattributes]> self.c.trianglearealist
         def __set__(self, double[:] value):
             assert value.size == self.c.numberoftriangles
-            replace_d(&(self.c.triangleattributelist), value)
+            replace_d(&(self.c.trianglearealist), value)
 
     property numberoftriangles:
         def __get__(self):
@@ -117,7 +118,14 @@ cdef class TriangulateIO:
         def __set__(self, double[:]  value):
             replace_d(&(self.c.holelist), value)
             self.c.numberofholes = value.size/2
-            
+
+    property regionlist:
+        def __get__(self):
+            return <double[:self.c.numberofregions*4]> self.c.regionlist
+        def __set__(self, double[:]  value):
+            replace_d(&(self.c.regionlist), value)
+            self.c.numberofregions = value.size/4
+
     property edgelist:
         def __get__(self):
             return <int[:self.c.numberofedges*2]> self.c.edgelist
@@ -195,9 +203,7 @@ def triang(char* switch, TriangulateIO in_, TriangulateIO out_, vorout=None):
         vorout_ = vorout
         ct.triangulate(switch, &in_.c, &out_.c, &(vorout_.c))
     else:
-        ct.triangulate(switch, &in_.c, &out_.c, NULL)
-    
+        ct.triangulate(switch, &in_.c, &out_.c, NULL)    
     # Copy whole array to avoid freeing of non-allocated pointers
     copy_d(&(out_.c.holelist), out_.c.numberofholes*2)
-    #TODO: Fix this when support for regions is added. 
-    #copy_d(&(out_.c.regionlist), out_.c.numberofregions*?)
+    copy_d(&(out_.c.regionlist), out_.c.numberofregions*4)
