@@ -1,8 +1,11 @@
-from triangle.plot import demo
+import triangle
+import triangle.plot
 from numpy import *
 import matplotlib.pyplot as plt
 
 theta = linspace(0, 2*pi, 33)[:-1]
 pts = vstack((cos(theta), sin(theta))).T
-demo(plt, pts, maxarea=0.05)
+A = dict(vertices=pts)
+B = triangle.triangulate(A, 'qa0.05')
+triangle.plot.compare(plt, A, B)
 plt.show()

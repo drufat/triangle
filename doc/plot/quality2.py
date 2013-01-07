@@ -1,19 +1,18 @@
 import triangle
-import triangle.data
 import triangle.plot
 import matplotlib.pyplot as plt
 
-import numpy as np
+la = triangle.get_data('la')
 
-d = triangle.data.la
+ax1 = plt.subplot(311, aspect='equal')
+triangle.plot.plot(ax1, **la)
 
-ax1 = plt.subplot(211, aspect='equal')
-triangle.plot.plot(ax1, **d)
+t = triangle.triangulate(la, 'pq')
+ax2 = plt.subplot(312, sharex=ax1, sharey=ax1)
+triangle.plot.plot(ax2, **t)
 
-
-pts, tri = triangle.triangulate1(constrained=True, quality=True, **d)
-
-ax2 = plt.subplot(212, sharex=ax1, sharey=ax1)
-triangle.plot.plot(ax2, vertices=pts, triangles=tri)
+t = triangle.triangulate(la, 'pqa')
+ax2 = plt.subplot(313, sharex=ax1, sharey=ax1)
+triangle.plot.plot(ax2, **t)
 
 plt.show()

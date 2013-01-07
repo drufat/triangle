@@ -1,16 +1,14 @@
 import triangle
-import triangle.data
-import triangle.plot
+import triangle.plot as plot
 import matplotlib.pyplot as plt
 
-pts = triangle.data.spiral['vertices']
-
+spiral = triangle.get_data('spiral')
 ax1 = plt.subplot(121, aspect='equal')
-triangle.plot.plot(ax1, vertices=pts)
+plot.plot(ax1, **spiral)
 
-pnts, triangles = triangle.triangulate(pts)
+t = triangle.triangulate(spiral)
 
 ax2 = plt.subplot(122, sharex=ax1, sharey=ax1)
-triangle.plot.plot(ax2, vertices=pnts, triangles=triangles)
+plot.plot(ax2, **t)
 
 plt.show()

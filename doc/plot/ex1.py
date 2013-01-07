@@ -1,7 +1,9 @@
-from triangle.plot import demo
+import triangle
+import triangle.plot
 from numpy import *
 import matplotlib.pyplot as plt
 
-pts = array(((0,0), (1,0), (1, 1), (0, 1)))
-demo(plt, pts)
+A = dict(vertices=array(((0,0), (1,0), (1, 1), (0, 1))))
+B = triangle.triangulate(A)
+triangle.plot.compare(plt, A, B)
 plt.show()

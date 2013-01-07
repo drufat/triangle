@@ -1,16 +1,11 @@
 import triangle
-import triangle.data
-import triangle.plot
+import triangle.plot as plot
 import matplotlib.pyplot as plt
 
-import numpy as np
-
-pts = triangle.data.dot['vertices']
-
-ax1 = plt.subplot(111, aspect='equal')
-
+dots = triangle.get_data('dots')
+pts = dots['vertices']
 segs = triangle.convex_hull(pts)
 
-triangle.plot.plot(ax1, vertices=pts, segments=segs)
+plot.plot(plt.axes(), vertices=pts, segments=segs)
 
 plt.show()

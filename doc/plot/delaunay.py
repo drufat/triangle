@@ -1,6 +1,8 @@
-import triangle.data as data
-from triangle.plot import demo
+import triangle
+import triangle.plot
 import matplotlib.pyplot as plt
 
-demo(plt, data.dot['vertices'])
+d0 = triangle.get_data('dots')
+d1 = triangle.triangulate(d0)
+triangle.plot.compare(plt, d0, d1)
 plt.show()

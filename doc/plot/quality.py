@@ -1,23 +1,22 @@
-import matplotlib.pyplot as plt
 import triangle
-import triangle.data
-import triangle.plot
+import triangle.plot as plot
+import matplotlib.pyplot as plt
 
-d = triangle.data.spiral
+spiral = triangle.get_data('spiral')
 
 ax1 = plt.subplot(221, aspect='equal')
-triangle.plot.plot(ax1, vertices=d['vertices'])
+triangle.plot.plot(ax1, vertices=spiral['vertices'])
 
-pnts, triangles = triangle.triangulate(d['vertices'])
+a = triangle.triangulate(spiral)
 ax2 = plt.subplot(222, sharex=ax1, sharey=ax1)
-triangle.plot.plot(ax2, vertices=pnts, triangles=triangles)
+plot.plot(ax2, **a)
 
-pnts, triangles = triangle.triangulate(d['vertices'], quality=True)
+b = triangle.triangulate(spiral, 'q')
 ax3 = plt.subplot(223, sharex=ax1, sharey=ax1)
-triangle.plot.plot(ax3, vertices=pnts, triangles=triangles)
+plot.plot(ax3, **b)
 
-pnts, triangles = triangle.triangulate(d['vertices'], quality=True, minangle=32.5)
+c = triangle.triangulate(spiral, 'q32.5')
 ax4 = plt.subplot(224, sharex=ax1, sharey=ax1)
-triangle.plot.plot(ax4, vertices=pnts, triangles=triangles)
+plot.plot(ax4, **c)
 
 plt.show()

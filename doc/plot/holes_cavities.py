@@ -1,19 +1,15 @@
 import triangle
-import triangle.data
-import triangle.plot
+import triangle.plot as plot
 import matplotlib.pyplot as plt
 
-import numpy as np
-
-d = triangle.data.face
+face = triangle.get_data('face')
 
 ax1 = plt.subplot(121, aspect='equal')
-triangle.plot.plot(ax1, **d)
+plot.plot(ax1, **face)
 
-
-pts, tri = triangle.triangulate1(constrained=True, **d)
+t = triangle.triangulate(face, 'p')
 
 ax2 = plt.subplot(122, sharex=ax1, sharey=ax1)
-triangle.plot.plot(ax2, vertices=pts, triangles=tri)
+triangle.plot.plot(ax2, **t)
 
 plt.show()
