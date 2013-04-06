@@ -38,6 +38,9 @@ def triangulate(tri, opts=''):
               ('pointmarkerlist', 'vertex_markers', 'int32', 1),
               ('segmentmarkerlist', 'segment_markers', 'int32', 1),)
     
+    if ('vertices' not in tri) or (len(tri['vertices'])<3) :
+        raise ValueError('Input must have at least three input vertices.')
+    
     a = core.TriangulateIO()    
     for n0, n1, t, _ in fields:
         if n1 not in tri: 
