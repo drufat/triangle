@@ -3,6 +3,9 @@ python:
     - "2.6"
     - "2.7"
 
+before_install:
+    - pip install Cython
+
 install:
     - pip install .
 
