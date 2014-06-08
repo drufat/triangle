@@ -198,7 +198,7 @@ def loads(node=None,
     start_at_zero = [True]
     def _vertices(tokens):
         head, tokens = split(tokens, 4)
-        N_vertices, dim, N_attr, N_bnd_markers = map(int, head)
+        N_vertices, dim, N_attr, N_bnd_markers = list(map(int, head))
         if N_vertices==0: return tokens
 
         head, tokens = split(tokens, N_vertices*(1+dim+N_attr+N_bnd_markers))
@@ -215,7 +215,7 @@ def loads(node=None,
 
     def _ele(tokens):
         head, tokens = split(tokens, 3)
-        N_triangles, N_nodes, N_attr = map(int, head)
+        N_triangles, N_nodes, N_attr = list(map(int, head))
         if N_triangles==0: return tokens
 
         head, tokens = split(tokens, N_triangles*(1+N_nodes+N_attr))
@@ -230,7 +230,7 @@ def loads(node=None,
 
     def _segments(tokens):
         head, tokens = split(tokens, 2)
-        N_segments, N_bnd_markers = map(int, head)
+        N_segments, N_bnd_markers = list(map(int, head))
         if N_segments == 0: return tokens
 
         head, tokens = split(tokens, N_segments*(3+N_bnd_markers))
@@ -266,12 +266,12 @@ def loads(node=None,
     def _edge(inpt):
         tokens = inpt.split('\n')
         head, tokens = split(tokens, 1)
-        N_edges, N_bnd_markers = map(int, head[0].split())
+        N_edges, N_bnd_markers = list(map(int, head[0].split()))
         if N_edges == 0: return
 
-        tokens = map(lambda x: x.split(), tokens)
-        edges = filter(lambda x: len(x)==(3+N_bnd_markers), tokens)
-        rays = filter(lambda x: len(x)==(5+N_bnd_markers), tokens)
+        tokens = [x.split() for x in tokens]
+        edges = [x for x in tokens if len(x)==(3+N_bnd_markers)]
+        rays = [x for x in tokens if len(x)==(5+N_bnd_markers)]
         edges= np.array(edges)
         rays = np.array(rays)
         data['edges'] = np.array(edges[:,1:3], dtype=np.int32)
@@ -298,7 +298,7 @@ def loads(node=None,
 
     def _neigh(tokens):
         head, tokens = split(tokens, 2)
-        N_triangles, N_neighs = map(int, head)
+        N_triangles, N_neighs = list(map(int, head))
         if N_triangles == 0: return tokens
 
         head, tokens = split(tokens, N_triangles*(1+N_neighs))
