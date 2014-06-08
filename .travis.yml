@@ -10,4 +10,4 @@ script:
     - nosetests --with-doctest
 
 notifications:
-  email: false
+	email: false
