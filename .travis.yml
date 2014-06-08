@@ -8,6 +8,7 @@ before_install:
 
 install:
     - pip install .
+    - python setup.py build_ext --inplace
 
 script:
     - nosetests --with-doctest
