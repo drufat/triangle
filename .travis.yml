@@ -16,6 +16,7 @@ before_install:
 
 install:
     - pip install .
+    - python setup.py build_ext -i
 
 script:
     - nosetests --with-doctest triangle
