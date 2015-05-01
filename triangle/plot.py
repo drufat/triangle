@@ -1,5 +1,3 @@
-from triangle import triangulate
-
 def compare(plt, A, B): 
     ax1 = plt.subplot(121, aspect='equal')
     plot(ax1, **A)
