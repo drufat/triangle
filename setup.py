@@ -1,5 +1,4 @@
-from distutils.core import setup, Extension
-from Cython.Distutils import build_ext
+from setuptools import setup, Extension
 
 define_macros = [('VOID', 'int'),
                  ('REAL', 'double'),
@@ -30,8 +29,10 @@ setup(name='triangle',
         'Programming Language :: Python :: 3.4',
     ],
     url='http://dzhelil.info/triangle',
-    requires = ['numpy(>=1.7.0)', 'cython(>=0.18)'],
-    cmdclass = {'build_ext': build_ext},
+    setup_requires=['setuptools>=18.0',
+                    'Cython>=0.18'],
+    install_requires=['numpy>=1.7.0',
+                      'Cython>=0.18'],
     ext_modules=[
                  Extension('triangle.core', ['c/triangle.c', 
                                              'triangle/c_triangle.pxd', 
