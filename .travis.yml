@@ -12,7 +12,7 @@ python:
     - "3.4"
 
 before_install:
-    - pip install Cython
+    - pip install setuptools --upgrade
 
 install:
     - pip install .
