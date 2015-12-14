@@ -10,6 +10,8 @@ python:
     - "3.3"
     - "3.4"
 
+sudo: false
+
 before_install:
     - pip install setuptools --upgrade
 
