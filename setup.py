@@ -1,5 +1,9 @@
 from setuptools import setup, Extension
 
+#Read version number
+with open("triangle/version.py") as f:
+    exec(f.read())
+
 define_macros = [
     ('VOID', 'int'),
     ('REAL', 'double'),
@@ -19,7 +23,7 @@ setup(name='triangle',
           'data/*.edge',
           'data/*.neigh'
       ]},
-      version='2015.12.13',
+      version=__version__,
       description='Python binding to the triangle library',
       author='Dzhelil Rufat',
       author_email='drufat@caltech.edu',

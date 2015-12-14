@@ -1,6 +1,8 @@
+import os
+
 import numpy as np
 import triangle.core as core
-import os
+from .version import  __version__
 
 def triangulate(tri, opts=''):
     '''
