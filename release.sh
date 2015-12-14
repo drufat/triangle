@@ -6,4 +6,4 @@ echo v$VERSION
 git tag v$VERSION
 git push --tags
 python setup.py sdist
-twine upload dist/*
+twine upload dist/*${VERSION}*
