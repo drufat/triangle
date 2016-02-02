@@ -14,7 +14,7 @@ See the documentation at http://dzhelil.info/triangle/
 
 .. |Build Status| image:: https://travis-ci.org/drufat/triangle.png
    :target: https://travis-ci.org/drufat/triangle
-.. |Version Status| image:: https://pypip.in/v/triangle/badge.png
+.. |Version Status| image:: https://img.shields.io/pypi/v/triangle.svg
    :target: https://pypi.python.org/pypi/triangle/
-.. |Downloads| image:: https://pypip.in/d/triangle/badge.png
+.. |Downloads| image:: https://img.shields.io/pypi/dm/triangle.svg
    :target: https://pypi.python.org/pypi/triangle/
