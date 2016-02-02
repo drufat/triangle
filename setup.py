@@ -21,7 +21,8 @@ setup(name='triangle',
           'data/*.poly',
           'data/*.area',
           'data/*.edge',
-          'data/*.neigh'
+          'data/*.neigh',
+          'c_triangle.pxd'
       ]},
       version=__version__,
       description='Python binding to the triangle library',
@@ -49,7 +50,6 @@ setup(name='triangle',
           Extension('triangle.core',
                     [
                         'c/triangle.c',
-                        'triangle/c_triangle.pxd',
                         'triangle/core.pyx'
                     ],
                     include_dirs=['c'],
