@@ -9,15 +9,13 @@ python:
     - "3.2"
     - "3.3"
     - "3.4"
-
-sudo: false
+    - "3.5"
 
 before_install:
     - pip install setuptools --upgrade
 
 install:
-    - pip install .
-    - python setup.py build_ext -i
+    - python setup.py develop
 
 script:
     - nosetests --with-doctest triangle
