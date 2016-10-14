@@ -1,6 +1,6 @@
 from setuptools import setup, Extension
 
-#Read version number
+# Read version number
 with open("triangle/version.py") as f:
     exec(f.read())
 
@@ -36,15 +36,16 @@ setup(name='triangle',
           'Programming Language :: Python :: 3.2',
           'Programming Language :: Python :: 3.3',
           'Programming Language :: Python :: 3.4',
+          'Programming Language :: Python :: 3.5',
       ],
       url='http://dzhelil.info/triangle',
       setup_requires=[
-          'setuptools>=18.0',
-          'Cython>=0.18'
+          'setuptools>=28.3',
+          'Cython>=0.24'
       ],
       install_requires=[
-          'numpy>=1.7.0',
-          'Cython>=0.18'
+          'numpy>=1.11',
+          'Cython>=0.24'
       ],
       ext_modules=[
           Extension('triangle.core',
