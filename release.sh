@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-VERSION=`python -c "exec(open('triangle/version.py').read()); print(__version__)"`
+VERSION=`python -c "exec(open('triangle/version.py', 'r').read()); print(__version__)"`
 echo v$VERSION
 
 git tag v$VERSION
