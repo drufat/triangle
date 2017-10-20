@@ -93,10 +93,10 @@ cdef class TriangulateIO:
 
     property neighborlist:
         def __get__(self):
-            return <double[:self.c.numberoftriangleattributes]> self.c.triangleattributelist
-        def __set__(self, double[:] value):
-            assert value.size == self.c.numberoftriangles
-            replace_d(&(self.c.triangleattributelist), value)
+            return <int[:self.c.numberoftriangles*3]> self.c.neighborlist
+        def __set__(self, int[:] value):
+            assert value.size == self.c.numberoftriangles*3
+            replace_i(&(self.c.neighborlist), value)
 
     property segmentlist:
         def __get__(self):
