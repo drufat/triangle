@@ -179,8 +179,8 @@ def voronoi(pts):
     n = np.array(_vorout.normlist).reshape((-1, 2))
     fltr = (e[:, 1] != -1)
     edges = e[fltr]
-    ray_origin = e[-fltr][:, 0]
-    ray_direct = n[-fltr]
+    ray_origin = e[~fltr][:, 0]
+    ray_direct = n[~fltr]
 
     return p, edges, ray_origin, ray_direct
 
