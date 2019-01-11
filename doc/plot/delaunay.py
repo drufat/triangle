@@ -1,8 +1,8 @@
-import triangle
-import triangle.plot
 import matplotlib.pyplot as plt
 
-d0 = triangle.get_data('dots')
-d1 = triangle.triangulate(d0)
-triangle.plot.compare(plt, d0, d1)
+import triangle as tr
+
+d0 = tr.get_data('dots')
+d1 = tr.triangulate(d0)
+tr.compare(plt, d0, d1)
 plt.show()

@@ -1,8 +1,10 @@
 from setuptools import setup, Extension
+from Cython.Build import cythonize
 
 # Read version number
+ns = {}
 with open("triangle/version.py") as f:
-    exec(f.read())
+    exec(f.read(), ns)
 
 define_macros = [
     ('VOID', 'int'),
@@ -12,48 +14,43 @@ define_macros = [
     ('ANSI_DECLARATORS', 1),
 ]
 
-setup(name='triangle',
-      packages=['triangle'],
-      package_dir={'triangle': 'triangle'},
-      package_data={'triangle': [
-          'data/*.node',
-          'data/*.ele',
-          'data/*.poly',
-          'data/*.area',
-          'data/*.edge',
-          'data/*.neigh',
-          'c_triangle.pxd'
-      ]},
-      version=__version__,
-      description='Python binding to the triangle library',
-      author='Dzhelil Rufat',
-      author_email='drufat@caltech.edu',
-      license='GNU LGPL',
-      classifiers=[
-          'Development Status :: 4 - Beta',
-          'Programming Language :: Python :: 2.6',
-          'Programming Language :: Python :: 2.7',
-          'Programming Language :: Python :: 3.2',
-          'Programming Language :: Python :: 3.3',
-          'Programming Language :: Python :: 3.4',
-          'Programming Language :: Python :: 3.5',
-      ],
-      url='http://dzhelil.info/triangle',
-      setup_requires=[
-          'setuptools>=28.3',
-          'Cython>=0.24'
-      ],
-      install_requires=[
-          'numpy>=1.11',
-          'Cython>=0.24'
-      ],
-      ext_modules=[
-          Extension('triangle.core',
-                    [
-                        'c/triangle.c',
-                        'triangle/core.pyx'
-                    ],
-                    include_dirs=['c'],
-                    define_macros=define_macros)
-      ]
-      )
+ext_modules = [
+    Extension(
+        'triangle.core',
+        [
+            'c/triangle.c',
+            'triangle/core.pyx'
+        ],
+        include_dirs=['c'],
+        define_macros=define_macros,
+    ),
+]
+
+ext_modules = cythonize(
+    ext_modules,
+    compiler_directives={
+        'language_level': 3
+    })
+
+setup(
+    name='triangle',
+    version=ns['__version__'],
+    description='Python binding to the triangle library',
+    author='Dzhelil Rufat',
+    author_email='d@rufat.be',
+    url='http://rufat.be/triangle',
+    packages=['triangle'],
+    package_data={'triangle': [
+        'data/*.node',
+        'data/*.ele',
+        'data/*.poly',
+        'data/*.area',
+        'data/*.edge',
+        'data/*.neigh',
+        'c_triangle.pxd'
+    ]},
+    install_requires=[
+        'numpy',
+    ],
+    ext_modules=ext_modules,
+)

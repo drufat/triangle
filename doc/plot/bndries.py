@@ -1,20 +1,16 @@
-import triangle
-import triangle.plot
 import matplotlib.pyplot as plt
 
+import triangle as tr
+
+
 def bndry(dict):
-    d = {}
-    for k in ('vertices', 'segments'): d[k] = dict[k]
-    return d
+    return {k: dict[k] for k in ('vertices', 'segments')}
 
-face = triangle.get_data('face.1')
 
-ax1 = plt.subplot(121, aspect='equal')
-rslt = triangle.triangulate(face, 'rc')
-triangle.plot.plot(ax1, **bndry(rslt))
+face = tr.get_data('face.1')
+A = tr.triangulate(face, 'rc')
+B = tr.triangulate(face, 'rpc')
 
-ax2 = plt.subplot(122, sharex=ax1, sharey=ax1, aspect='equal')
-rslt = triangle.triangulate(face, 'rpc')
-triangle.plot.plot(ax2, **bndry(rslt))
+tr.compare(plt, bndry(A), bndry(B))
 
 plt.show()

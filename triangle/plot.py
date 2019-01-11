@@ -1,14 +1,28 @@
 def compare(plt, A, B):
-    ax1 = plt.subplot(121, aspect='equal')
+    plt.figure(figsize=(6, 3))
+    ax1 = plt.subplot(121)
     plot(ax1, **A)
-    ax2 = plt.subplot(122, sharex=ax1, sharey=ax1)
+    lim = ax1.axis()
+    ax2 = plt.subplot(122, sharey=ax1)
     plot(ax2, **B)
+    ax2.axis(lim)
+    plt.tight_layout()
+
+
+def comparev(plt, A, B):
+    plt.figure(figsize=(3, 6))
+    ax1 = plt.subplot(211)
+    plot(ax1, **A)
+    lim = ax1.axis()
+    ax2 = plt.subplot(212, sharex=ax1)
+    plot(ax2, **B)
+    ax2.axis(lim)
+    plt.tight_layout()
 
 
 def plot(ax, **kw):
-    vertices(ax, **kw)
     ax.axes.set_aspect('equal')
-
+    vertices(ax, **kw)
     if 'segments' in kw: segments(ax, **kw)
     if 'triangles' in kw: triangles(ax, **kw)
     if 'holes' in kw: holes(ax, **kw)
@@ -36,9 +50,11 @@ def segments(ax, **kw):
     for beg, end in segs:
         x0, y0 = verts[beg, :]
         x1, y1 = verts[end, :]
-        ax.fill([x0, x1], [y0, y1],
-                facecolor='none', edgecolor='r', linewidth=3,
-                zorder=0)
+        ax.fill(
+            [x0, x1], [y0, y1],
+            facecolor='none', edgecolor='r',
+            linewidth=3, zorder=0,
+        )
 
 
 def triangles(ax, **kw):
@@ -71,5 +87,9 @@ def edges(ax, **kw):
         x0, y0 = verts[beg, :]
         scale = 100.0  # some large number
         x1, y1 = x0 + scale * vx, y0 + scale * vy
-        ax.fill([x0, x1], [y0, y1], facecolor='none', edgecolor='k', linewidth=.5)
+        ax.fill(
+            [x0, x1], [y0, y1],
+            facecolor='none', edgecolor='k',
+            linewidth=.5,
+        )
     ax.axis(lim)  # make sure figure is not rescaled by ifinite ray

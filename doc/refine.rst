@@ -1,4 +1,4 @@
-Refining preexisting meshes
+Refining Preexisting Meshes
 ===========================
 
 The -r switch causes a mesh (.node and .ele files) to be read and refined. If
@@ -18,12 +18,11 @@ consists of the files box.1.node and box.1.ele.
 
 .. plot:: 
 
-    import triangle
-    import triangle.plot
+    import triangle as tr
     import matplotlib.pyplot as plt
     
-    box1 = triangle.get_data('bbox.1')
-    triangle.plot.plot(plt.axes(), **box1)
+    box1 = tr.get_data('bbox.1')
+    tr.plot(plt.axes(), **box1)
     plt.show()
 
 This mesh is refined with an area constraint of 0.2, creating a new mesh with

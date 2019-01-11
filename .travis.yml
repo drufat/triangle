@@ -1,24 +1,21 @@
 language: python
 
 os:
-    - linux
+  - linux
 
 python:
-    - "2.6"
-    - "2.7"
-    - "3.3"
-    - "3.4"
-    - "3.5"
-    - "3.6"
+  - "3.4"
+  - "3.5"
+  - "3.6"
 
 before_install:
-    - pip install setuptools --upgrade
+  - pip install cython setuptools --upgrade
 
 install:
-    - python setup.py develop
+  - python setup.py develop
 
 script:
-    - nosetests --with-doctest triangle
+  - nosetests --with-doctest triangle/triangle.py
 
 notifications:
-    email: false
+  email: false

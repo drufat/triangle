@@ -1,4 +1,4 @@
-Voronoi diagrams
+Voronoi Diagrams
 =================
 
 The -v switch produces the Voronoi diagram of a vertex set in files suffixed

@@ -3,7 +3,7 @@ Installation
 
 To install simply run:: 
 
-   easy_install triangle 
+   pip install triangle
     
 or build from source:: 
 

@@ -1,22 +1,25 @@
+Data
+=====
 
-Data Objects
-============
-
+A
+---
 **A** is a planar straight line graph of the capital letter A. We use it as
 input to get a constrained Delaunay triangulation. 
 
 .. plot::
 
-    from triangle import show_data
-    show_data('A')
+    import triangle as tr
+    tr.show_data('A')
 
+BOX
+---
 **BOX** is a planar straight line graph of a double box. We use it as input to
 get a constrained Delaunay triangulation. 
 
 .. plot::
 
-    from triangle import show_data
-    show_data('box')
+    import triangle as tr
+    tr.show_data('box')
     
 The command::
 
@@ -27,8 +30,8 @@ area with segments.)
 
 .. plot::
 
-    from triangle import show_data
-    show_data('box.1')
+    import triangle as tr
+    tr.show_data('box.1')
 
 The command::
 
@@ -39,8 +42,9 @@ refines the box.1 mesh with an area constraint of 0.2:
 
 .. plot::
 
-    from triangle import show_data
-    show_data('box.2')
+    import triangle as tr
+    tr.show_data('box.2')
+
 
 The command::
 
@@ -52,33 +56,36 @@ maximum area:
 
 .. plot::
 
-    from triangle import show_data
-    show_data('box.3')
+    import triangle as tr
+    tr.show_data('box.3')
 
 The command "triangulate(box3, opts='rpa0.0125')" refines the box.3 mesh with an
 area constraint of 0.0125, 1/4 of the previous maximum area: 
 
 .. plot::
 
-    from triangle import show_data
-    show_data('box.4')
-    
+    import triangle as tr
+    tr.show_data('box.4')
+
+DIAMOND_02_00009
+-----------------
 **DIAMOND_02_00009** is another set of test data, for which we want the Voronoi
 diagram. 
 
 .. plot::
 
-    from triangle import show_data
-    show_data('diamond_02_00009')
+    import triangle as tr
+    tr.show_data('diamond_02_00009')
 
 .. plot::
 
-    from triangle import show_data
-    show_data('diamond_02_00009.1')
+    import triangle as tr
+    tr.show_data('diamond_02_00009.1')
 
 .. plot:: plot/voronoi1.py
 
-
+DOUBLE_HEX
+-----------
 **DOUBLE_HEX** describes a unit square with two hexagonal holes. 72 points are
 listed on the outer boundary, and 12 on each of the holes. It is desired to
 create a nice looking mesh of about 500 nodes, and no additional nodes on the
@@ -86,8 +93,8 @@ boundary segments.
 
 .. plot::
 
-    from triangle import show_data
-    show_data('double_hex')
+    import triangle as tr
+    tr.show_data('double_hex')
     
 Our first command::
 
@@ -97,8 +104,8 @@ requests that we triangulate the current points:
 
 .. plot::
 
-    from triangle import show_data
-    show_data('double_hex.1')
+    import triangle as tr
+    tr.show_data('double_hex.1')
     
 Our second command::
 
@@ -112,9 +119,11 @@ elements:
 
 .. plot::
 
-    from triangle import show_data
-    show_data('double_hex.2')
+    import triangle as tr
+    tr.show_data('double_hex.2')
 
+DOUBLE_HEX2
+-------------
 **DOUBLE_HEX2** describes a unit square with two hexagonal holes. 36 points are
 listed on the outer boundary, and 6 on each of the holes. It is desired to
 create a nice looking mesh of about 235 elements, and no additional nodes on
@@ -122,8 +131,8 @@ the boundary segments.
 
 .. plot::
 
-    from triangle import show_data
-    show_data('double_hex2')
+    import triangle as tr
+    tr.show_data('double_hex2')
 
 Our first command::
 
@@ -133,8 +142,8 @@ requests that we triangulate the current points:
 
 .. plot::
 
-    from triangle import show_data
-    show_data('double_hex2.1')
+    import triangle as tr
+    tr.show_data('double_hex2.1')
 
 Our second command::
 
@@ -147,8 +156,8 @@ elements:
 
 .. plot::
 
-    from triangle import show_data
-    show_data('double_hex2.2')
+    import triangle as tr
+    tr.show_data('double_hex2.2')
 
 **DOUBLE_HEX3** describes a unit square with two hexagonal holes. 4 points are
 listed on the outer boundary, and 6 on each of the holes. We want triangle to
@@ -156,8 +165,8 @@ triangulate this region.
 
 .. plot::
 
-    from triangle import show_data
-    show_data('double_hex3')
+    import triangle as tr
+    tr.show_data('double_hex3')
 
 Our command::
 
@@ -168,17 +177,21 @@ triangle has an area greater than 0.0015.
 
 .. plot::
 
-    from triangle import show_data
-    show_data('double_hex3.1')
+    import triangle as tr
+    tr.show_data('double_hex3.1')
 
+ELL
+-----
 **ELL** is a triangulation of an L-shaped region, using a mesh of 21 nodes and
 24 elements. 
 
 .. plot::
 
-    from triangle import show_data
-    show_data('ell')
+    import triangle as tr
+    tr.show_data('ell')
 
+GREENLAND
+----------
 **GREENLAND** is a triangulation of Greenland, using a graded (varying-size)
 mesh of 33,343 nodes and 64,125 elements. The resulting image is essentially a
 black blob the shape of Greenland. However, by modifying the code below, it is
@@ -186,9 +199,11 @@ possible to see interesting details of the mesh.
 
 .. plot::
 
-    from triangle import show_data
-    show_data('greenland')
+    import triangle as tr
+    tr.show_data('greenland')
 
+LA
+----
 **LA** is a POLY file containing information representing soil layers. The data
 includes points that are bounded by line segments defining the different
 layers. The intent is that certain layers will be triangulated with smaller
@@ -196,23 +211,28 @@ area requirements.
 
 .. plot::
 
-    from triangle import show_data
-    show_data('la')
+    import matplotlib.pyplot as plt
+    import triangle as tr
 
+    plt.figure(figsize=(8, 3))
+    tr.show_data('la')
+
+SPIRAL
+--------
 **SPIRAL** is a node file containing points that form a spiral.
 
 .. plot::
 
-    from triangle import show_data
-    show_data('spiral')
+    import triangle as tr
+    tr.show_data('spiral')
 
 The command "triangle spiral" produces a Delaunay triangulation of the points,
 in the following node and element files:
 
 .. plot::
 
-    from triangle import show_data
-    show_data('spiral.1')
+    import triangle as tr
+    tr.show_data('spiral.1')
 
 The command "triangle -q spiral" produces a Delaunay triangulation with no angle
 smaller than 20 degrees (the default). This is done by adding points as
@@ -220,8 +240,8 @@ necessary: in the following node and element files:
 
 .. plot::
 
-    from triangle import show_data
-    show_data('spiral.q.1')
+    import triangle as tr
+    tr.show_data('spiral.q.1')
 
 The command "triangle -q32.5 spiral" produces a Delaunay triangulation with no
 angle smaller than 32.5 degrees. This is done by adding points as necessary: in
@@ -229,21 +249,22 @@ the following node and element files:
 
 .. plot::
 
-    from triangle import show_data
-    show_data('spiral.r.1')
+    import triangle as tr
+    tr.show_data('spiral.r.1')
 
+SQUARE_CIRCLE_HOLE
+-------------------
 **SQUARE_CIRCLE_HOLE** is a planar straight line graph of a square region with
 an off center circular hole, and 826 points computed by a CVT calculation,
 prepared by Hua Fei.
 
 .. plot::
 
-    from triangle import show_data
-    show_data('square_circle_hole')
+    import triangle as tr
+    tr.show_data('square_circle_hole')
 
 .. plot::
 
-    from triangle import show_data
-    show_data('square_circle_hole.1')
+    import triangle as tr
+    tr.show_data('square_circle_hole.1')
 
-    

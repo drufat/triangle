@@ -1,4 +1,4 @@
-Quality meshing: angle and size constraints
+Quality Meshing: Angle and Size Constraints
 ===========================================
 
 Triangle generates a conforming constrained Delaunay triangulation whenever the
@@ -19,12 +19,9 @@ The -a switch sets a maximum area constraint. There are three ways to use this
 switch. The first way is to specify a maximum area on the command line. The
 next example is a mesh in which no triangle has area greater than 0.2.
 
-
 ::
 
    triangulate(spiral,'a.2') 
-
-
 
 .. plot:: plot/quality1.py
 

@@ -1,16 +1,10 @@
-import triangle
-import triangle.plot
 import matplotlib.pyplot as plt
 
-pts = triangle.get_data('diamond_02_00009')['vertices']
+import triangle as tr
 
-ax1 = plt.subplot(121, aspect='equal')
-triangle.plot.plot(ax1, vertices=pts)
-lim = ax1.axis()
+pts = tr.get_data('diamond_02_00009')['vertices']
+t = dict(vertices=pts)
+d = tr.get_data('diamond_02_00009.1.v')
 
-d = triangle.get_data('diamond_02_00009.1.v')
-ax2 = plt.subplot(122, sharex=ax1, sharey=ax1)
-triangle.plot.plot(ax2, **d)
-ax2.axis(lim)
-
+tr.compare(plt, t, d)
 plt.show()

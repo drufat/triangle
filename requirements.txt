@@ -1,2 +1,2 @@
-numpy>=1.11
-Cython>=0.24
+Cython
+numpy

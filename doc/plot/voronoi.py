@@ -1,17 +1,15 @@
-import triangle
-import triangle.plot
 import matplotlib.pyplot as plt
 
-pts = triangle.get_data('dots')['vertices']
+import triangle as tr
 
-ax1 = plt.subplot(121, aspect='equal')
-triangle.plot.plot(ax1, vertices=pts)
-lim = ax1.axis()
+pts = tr.get_data('dots')['vertices']
 
-points, edges, ray_origin, ray_direct = triangle.voronoi(pts)
-d = dict(vertices=points, edges=edges, ray_origins=ray_origin, ray_directions=ray_direct)
-ax2 = plt.subplot(122, sharex=ax1, sharey=ax1)
-triangle.plot.plot(ax2, **d)
-ax2.axis(lim)
+A = dict(vertices=pts)
 
+points, edges, ray_origin, ray_direct = tr.voronoi(pts)
+B = dict(
+    vertices=points, edges=edges,
+    ray_origins=ray_origin, ray_directions=ray_direct
+)
+tr.compare(plt, A, B)
 plt.show()

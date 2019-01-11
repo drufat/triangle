@@ -1,9 +1,9 @@
-import triangle
-import triangle.plot as plot
 import matplotlib.pyplot as plt
 
+import triangle as tr
+
 ax = plt.axes()
-A = triangle.get_data('A')
-t = triangle.triangulate(A, 'p')
-plot.plot(ax, **t)
+A = tr.get_data('A')
+t = tr.triangulate(A, 'p')
+tr.plot(ax, **t)
 plt.show()

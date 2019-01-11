@@ -1,9 +1,9 @@
-import triangle
-import triangle.plot
-from numpy import *
 import matplotlib.pyplot as plt
+import numpy as np
 
-A = dict(vertices=array(((0,0), (1,0), (1, 1), (0, 1))))
-B = triangle.triangulate(A)
-triangle.plot.compare(plt, A, B)
+import triangle as tr
+
+A = dict(vertices=np.array(((0, 0), (1, 0), (1, 1), (0, 1))))
+B = tr.triangulate(A)
+tr.compare(plt, A, B)
 plt.show()

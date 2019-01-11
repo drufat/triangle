@@ -5,3 +5,5 @@ triangle/core.c
 .eggs/
 build/
 triangle.egg-info/
+
+plot_build

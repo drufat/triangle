@@ -1,0 +1,13 @@
+.. list-table::
+    :widths: 35 65
+
+    * - .. image:: {{ link }}.py.png
+      - .. image:: {{ link }}.png
+
+{% if html_show_formats -%}
+    [:download:`py <{{ link }}.py>`
+    {%- for fmt in formats -%}
+        , :download:`{{ fmt }} <{{ link }}.{{ fmt }}>`
+    {%- endfor %}]
+{%- endif %}
+

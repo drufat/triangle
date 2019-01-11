@@ -1,15 +1,9 @@
-import triangle
-import triangle.plot as plot
 import matplotlib.pyplot as plt
 
+import triangle as tr
 
-face = triangle.get_data('face')
-ax1 = plt.subplot(121, aspect='equal')
-plot.plot(ax1, **face)
+face = tr.get_data('face')
+t = tr.triangulate(face, 'pq10')
 
-t = triangle.triangulate(face, 'pq10')
-
-ax2 = plt.subplot(122, sharex=ax1, sharey=ax1)
-plot.plot(ax2, **t)
-
+tr.compare(plt, face, t)
 plt.show()
