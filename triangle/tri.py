@@ -48,38 +48,17 @@ def triangulate(tri, opts=''):
     
     >>> v = [[0, 0], [0, 1], [1, 1], [1, 0]]
     >>> t = triangulate({'vertices': v}, 'a0.2')
-    >>> t['vertices']
-    array([[0. , 0. ],
-           [0. , 1. ],
-           [1. , 1. ],
-           [1. , 0. ],
-           [0.5, 0.5],
-           [0. , 0.5],
-           [0.5, 0. ],
-           [1. , 0.5],
-           [0.5, 1. ]])
-    >>> t['vertex_markers']
-    array([[1],
-           [1],
-           [1],
-           [1],
-           [0],
-           [1],
-           [1],
-           [1],
-           [1]], dtype=int32)
-    >>> t['triangles']
-    array([[7, 2, 4],
-           [5, 0, 4],
-           [4, 8, 1],
-           [4, 1, 5],
-           [4, 0, 6],
-           [6, 3, 4],
-           [4, 3, 7],
-           [4, 2, 8]], dtype=int32)
+    >>> t['vertices'].tolist()
+    [[0.0, 0.0], [0.0, 1.0], [1.0, 1.0], [1.0, 0.0], [0.5, 0.5], [0.0, 0.5], [0.5, 0.0], [1.0, 0.5], [0.5, 1.0]]
+    >>> t['vertex_markers'].tolist()
+    [[1], [1], [1], [1], [0], [1], [1], [1], [1]]
+    >>> t['triangles'].tolist()
+    [[7, 2, 4], [5, 0, 4], [4, 8, 1], [4, 1, 5], [4, 0, 6], [6, 3, 4], [4, 3, 7], [4, 2, 8]]
+
+    .. plot:: plot/api_triangulate.py
 
     """
-    opts = 'Qz' + opts
+    opts = 'Qz{%s}' % opts
 
     tri = {translate_inv[_]: tri[_] for _ in tri}
     tri, _ = triang(tri, opts)
@@ -94,13 +73,10 @@ def delaunay(pts):
 
     >>> pts = [[0, 0], [0, 1], [0.5, 0.5], [1, 1], [1, 0]]
     >>> tri = delaunay(pts)
-    >>> tri
-    array([[1, 0, 2],
-           [2, 4, 3],
-           [4, 2, 0],
-           [2, 3, 1]], dtype=int32)
+    >>> tri.tolist()
+    [[1, 0, 2], [2, 4, 3], [4, 2, 0], [2, 3, 1]]
 
-    .. plot:: plot/delaunay2.py
+    .. plot:: plot/api_delaunay.py
 
     """
     opts = 'Qz'
@@ -118,13 +94,10 @@ def convex_hull(pts):
 
     >>> pts = [[0, 0], [0, 1], [1, 1], [1, 0]]
     >>> segments = convex_hull(pts)
-    >>> segments
-    array([[3, 0],
-           [2, 3],
-           [1, 2],
-           [0, 1]], dtype=int32)
+    >>> segments.tolist()
+    [[3, 0], [2, 3], [1, 2], [0, 1]]
 
-    .. plot:: plot/convex_hull1.py
+    .. plot:: plot/api_convex_hull.py
 
     """
     opts = 'Qzc'
@@ -142,25 +115,16 @@ def voronoi(pts):
 
     >>> pts = [[0, 0], [0, 1], [0.5, 0.5], [1, 1], [1, 0]]
     >>> points, edges, ray_origin, ray_direct = voronoi(pts)
-    >>> points
-    array([[0. , 0.5],
-           [1. , 0.5],
-           [0.5, 0. ],
-           [0.5, 1. ]])
-    >>> edges
-    array([[0, 2],
-           [0, 3],
-           [1, 2],
-           [1, 3]], dtype=int32)
-    >>> ray_origin
-    array([0, 1, 2, 3], dtype=int32)
-    >>> ray_direct
-    array([[-1.,  0.],
-           [ 1.,  0.],
-           [ 0., -1.],
-           [ 0.,  1.]])
+    >>> points.tolist()
+    [[0.0, 0.5], [1.0, 0.5], [0.5, 0.0], [0.5, 1.0]]
+    >>> edges.tolist()
+    [[0, 2], [0, 3], [1, 2], [1, 3]]
+    >>> ray_origin.tolist()
+    [0, 1, 2, 3]
+    >>> ray_direct.tolist()
+    [[-1.0, 0.0], [1.0, 0.0], [0.0, -1.0], [0.0, 1.0]]
 
-    .. plot:: plot/voronoi2.py
+    .. plot:: plot/api_voronoi.py
 
     """
     opts = 'Qzv'

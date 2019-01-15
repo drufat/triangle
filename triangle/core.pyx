@@ -1,5 +1,4 @@
-from libc.stdlib cimport malloc, free
-from libc.string cimport memcpy
+from libc.stdlib cimport free
 import numpy as np
 
 
@@ -42,16 +41,6 @@ cdef extern from "triangle.h":
         triangulateio *out_,
         triangulateio *vorout
     )
-
-
-cdef copy_d(double** pA, int N):
-    if not (pA and N):
-        return
-    cdef double* pTemp = pA[0]
-    # Allocate new memory
-    pA[0] = <double*>malloc(sizeof(double)*N)
-    # Copy array
-    memcpy(pA[0], pTemp, sizeof(double)*N)
 
 
 cdef array_ii(int N, int M, int* p):

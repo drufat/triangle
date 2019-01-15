@@ -4,18 +4,17 @@ os:
   - linux
 
 python:
+  - "2.7"
   - "3.4"
   - "3.5"
   - "3.6"
 
-before_install:
-  - pip install cython setuptools --upgrade
-
 install:
+  - pip install -r requirements.txt
   - python setup.py develop
 
 script:
-  - nosetests --with-doctest triangle/triangle.py
+  - nosetests --with-doctest triangle/tri.py
 
 notifications:
   email: false

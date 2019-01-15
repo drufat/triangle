@@ -24,7 +24,8 @@ def loads(
     Load a dictionary representing the triangle data from strings.
     """
 
-    start_at_zero = True
+    class var:
+        start_at_zero = True
 
     data = {}
 
@@ -37,8 +38,8 @@ def loads(
         head, tokens = split(tokens, N_vertices * (1 + dim + N_attr + N_bnd_markers))
         v = np.array(head).reshape(-1, 1 + dim + N_attr + N_bnd_markers)
         # check if starting at zero or one
-        nonlocal start_at_zero
-        start_at_zero = (v[0, 0] == '0')
+
+        var.start_at_zero = (v[0, 0] == '0')
         data['vertices'] = np.array(v[:, 1:3], dtype='double')
         if N_attr > 0:
             data['vertex_attributes'] = np.array(v[:, 3:3 + N_attr], dtype='double')
@@ -56,7 +57,7 @@ def loads(
         head, tokens = split(tokens, N_triangles * (1 + N_nodes + N_attr))
         v = np.array(head).reshape(-1, 1 + N_nodes + N_attr)
         data['triangles'] = np.array(v[:, 1:N_nodes + 1], dtype='intc')
-        if not start_at_zero:
+        if not var.start_at_zero:
             data['triangles'] -= 1
         if N_attr > 0:
             data['triangle_attributes'] = np.array(v[:, N_nodes + 1:N_nodes + 1 + N_attr], dtype='double')
@@ -72,7 +73,7 @@ def loads(
         head, tokens = split(tokens, N_segments * (3 + N_bnd_markers))
         v = np.array(head).reshape(-1, 3 + N_bnd_markers)
         data['segments'] = np.array(v[:, 1:3], dtype='intc')
-        if not start_at_zero:
+        if not var.start_at_zero:
             data['segments'] -= 1
         if N_bnd_markers > 0:
             data['segment_markers'] = np.array(v[:, 3:3 + N_bnd_markers], dtype='intc')
@@ -117,7 +118,7 @@ def loads(
         data['ray_origins'] = np.array(rays[:, 1:2], dtype='intc')
         data['ray_directions'] = np.array(rays[:, 3:], dtype='double')
 
-        if not start_at_zero:
+        if not var.start_at_zero:
             data['edges'] -= 1
             data['ray_origins'] -= 1
 
@@ -145,7 +146,7 @@ def loads(
         head, tokens = split(tokens, N_triangles * (1 + N_neighs))
         v = np.array(head).reshape(-1, 1 + N_neighs)
         data['triangle_neighbors'] = np.array(v[:, 1:], dtype='intc')
-        if not start_at_zero:
+        if not var.start_at_zero:
             data['triangle_neighbors'] -= 1
 
     if node:

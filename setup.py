@@ -1,5 +1,4 @@
 from setuptools import setup, Extension
-from Cython.Build import cythonize
 
 # Read version number
 ns = {}
@@ -17,20 +16,11 @@ define_macros = [
 ext_modules = [
     Extension(
         'triangle.core',
-        [
-            'c/triangle.c',
-            'triangle/core.pyx'
-        ],
+        ['c/triangle.c', 'triangle/core.c'],
         include_dirs=['c'],
         define_macros=define_macros,
     ),
 ]
-
-ext_modules = cythonize(
-    ext_modules,
-    compiler_directives={
-        'language_level': 3
-    })
 
 setup(
     name='triangle',
@@ -38,7 +28,7 @@ setup(
     description='Python binding to the triangle library',
     author='Dzhelil Rufat',
     author_email='d@rufat.be',
-    url='http://rufat.be/triangle',
+    url='https://rufat.be/triangle',
     packages=['triangle'],
     package_data={'triangle': [
         'data/*.node',
@@ -47,7 +37,6 @@ setup(
         'data/*.area',
         'data/*.edge',
         'data/*.neigh',
-        'c_triangle.pxd'
     ]},
     install_requires=[
         'numpy',
