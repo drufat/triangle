@@ -1,5 +1,5 @@
 Examples
-==========
+========
 
 Let us triangulate a simple square
 

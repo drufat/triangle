@@ -1,4 +1,4 @@
-Generating Delaunay triangulations
+Generating Delaunay Triangulations
 ==================================
 
 Triangle's default behavior is to find the Delaunay triangulation of a set of
@@ -9,7 +9,7 @@ illustrated below.
     :code:
 
 To triangulate a PSLG instead, describe the geometry of the region you wish to
-mesh in a python dictionar, such as `get_data('face')`, illustrated below. Use
+mesh in a python dictionary, such as `get_data('face')`, illustrated below. Use
 the `-p` switch to specify that the input is a PSLG rather than a vertex set. The
 command:: 
 

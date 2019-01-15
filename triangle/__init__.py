@@ -1,7 +1,7 @@
 from triangle.plot import (
     plot, comparev, compare,
 )
-from triangle.triangle import (
+from triangle.tri import (
     triangulate,
     convex_hull, delaunay, voronoi,
 )

@@ -45,6 +45,39 @@ def triangulate(tri, opts=''):
     * `l` - Uses only vertical cuts in the divide-and-conquer algorithm. By default, Triangle uses alternating vertical and horizontal cuts, which usually improve the speed except with vertex sets that are small or short and wide. This switch is primarily of theoretical interest.
     * `s` - Specifies that segments should be forced into the triangulation by recursively splitting them at their midpoints, rather than by generating a constrained Delaunay triangulation. Segment splitting is true to Ruppert's original algorithm, but can create needlessly small triangles. This switch is primarily of theoretical interest.
     * `C` - Check the consistency of the final mesh. Uses exact arithmetic for checking, even if the -X switch is used. Useful if you suspect Triangle is buggy.
+    
+    >>> v = [[0, 0], [0, 1], [1, 1], [1, 0]]
+    >>> t = triangulate({'vertices': v}, 'a0.2')
+    >>> t['vertices']
+    array([[0. , 0. ],
+           [0. , 1. ],
+           [1. , 1. ],
+           [1. , 0. ],
+           [0.5, 0.5],
+           [0. , 0.5],
+           [0.5, 0. ],
+           [1. , 0.5],
+           [0.5, 1. ]])
+    >>> t['vertex_markers']
+    array([[1],
+           [1],
+           [1],
+           [1],
+           [0],
+           [1],
+           [1],
+           [1],
+           [1]], dtype=int32)
+    >>> t['triangles']
+    array([[7, 2, 4],
+           [5, 0, 4],
+           [4, 8, 1],
+           [4, 1, 5],
+           [4, 0, 6],
+           [6, 3, 4],
+           [4, 3, 7],
+           [4, 2, 8]], dtype=int32)
+
     """
     opts = 'Qz' + opts
 
@@ -61,6 +94,11 @@ def delaunay(pts):
 
     >>> pts = [[0, 0], [0, 1], [0.5, 0.5], [1, 1], [1, 0]]
     >>> tri = delaunay(pts)
+    >>> tri
+    array([[1, 0, 2],
+           [2, 4, 3],
+           [4, 2, 0],
+           [2, 3, 1]], dtype=int32)
 
     .. plot:: plot/delaunay2.py
 
@@ -80,6 +118,11 @@ def convex_hull(pts):
 
     >>> pts = [[0, 0], [0, 1], [1, 1], [1, 0]]
     >>> segments = convex_hull(pts)
+    >>> segments
+    array([[3, 0],
+           [2, 3],
+           [1, 2],
+           [0, 1]], dtype=int32)
 
     .. plot:: plot/convex_hull1.py
 
@@ -99,6 +142,23 @@ def voronoi(pts):
 
     >>> pts = [[0, 0], [0, 1], [0.5, 0.5], [1, 1], [1, 0]]
     >>> points, edges, ray_origin, ray_direct = voronoi(pts)
+    >>> points
+    array([[0. , 0.5],
+           [1. , 0.5],
+           [0.5, 0. ],
+           [0.5, 1. ]])
+    >>> edges
+    array([[0, 2],
+           [0, 3],
+           [1, 2],
+           [1, 3]], dtype=int32)
+    >>> ray_origin
+    array([0, 1, 2, 3], dtype=int32)
+    >>> ray_direct
+    array([[-1.,  0.],
+           [ 1.,  0.],
+           [ 0., -1.],
+           [ 0.,  1.]])
 
     .. plot:: plot/voronoi2.py
 

@@ -1,7 +1,10 @@
-.. include:: ../README.rst
+Triangle
+========
+
+.. include:: readme.rst
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     installing
     API
@@ -14,6 +17,11 @@
     convex
     voronoi
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+..
+..
+..
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`
+..
+..
