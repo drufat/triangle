@@ -42,4 +42,5 @@ setup(
         'numpy',
     ],
     ext_modules=ext_modules,
+    license='LGPLv3',
 )
