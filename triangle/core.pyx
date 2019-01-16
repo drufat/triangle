@@ -123,6 +123,7 @@ fields = (
     ('normlist', 'double'),
 )
 
+field_dtype = {name:dtype for name, dtype in fields}
 
 cdef _wrap(triangulateio* c):
 
@@ -204,6 +205,7 @@ def contig2d(value, dtype):
     value = np.ascontiguousarray(value, dtype=dtype)
     if len(value.shape) == 1:
         value = value.reshape((value.shape[0], 1))
+    assert value.flags['C_CONTIGUOUS']
     return value
 
 
@@ -211,8 +213,7 @@ cdef fin_(d, triangulateio* c):
     for name, dtype, _get, _set, _free in wrap(c):
         if name not in d:
             continue
-        value = contig2d(d[name], dtype)
-        _set(value)
+        _set(d[name])
 
 
 cdef fout_(triangulateio* c, d):
@@ -223,10 +224,12 @@ cdef fout_(triangulateio* c, d):
             _free()
 
 
-def triang(_in, opts):
+def triang(__in, opts):
 
-    if ('pointlist' not in _in) or (len(_in['pointlist']) < 3):
+    if ('pointlist' not in __in) or (len(__in['pointlist']) < 3):
         raise ValueError('Input must have at least three vertices.')
+
+    _in = {name:contig2d(__in[name], field_dtype[name]) for name in __in}
 
     opts = opts.encode('utf-8')
 

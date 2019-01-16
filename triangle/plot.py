@@ -1,5 +1,8 @@
-def compare(plt, A, B):
-    plt.figure(figsize=(6, 3))
+import numpy as np
+
+
+def compare(plt, A, B, figsize=(6, 3)):
+    plt.figure(figsize=figsize)
     ax1 = plt.subplot(121)
     plot(ax1, **A)
     lim = ax1.axis()
@@ -9,8 +12,8 @@ def compare(plt, A, B):
     plt.tight_layout()
 
 
-def comparev(plt, A, B):
-    plt.figure(figsize=(3, 6))
+def comparev(plt, A, B, figsize=(3, 6)):
+    plt.figure(figsize=figsize)
     ax1 = plt.subplot(211)
     plot(ax1, **A)
     lim = ax1.axis()
@@ -23,17 +26,21 @@ def comparev(plt, A, B):
 def plot(ax, **kw):
     ax.axes.set_aspect('equal')
     vertices(ax, **kw)
-    if 'segments' in kw: segments(ax, **kw)
-    if 'triangles' in kw: triangles(ax, **kw)
-    if 'holes' in kw: holes(ax, **kw)
-    if 'edges' in kw: edges(ax, **kw)
+    if 'segments' in kw:
+        segments(ax, **kw)
+    if 'triangles' in kw:
+        triangles(ax, **kw)
+    if 'holes' in kw:
+        holes(ax, **kw)
+    if 'edges' in kw:
+        edges(ax, **kw)
 
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
 
 
 def vertices(ax, **kw):
-    verts = kw['vertices']
+    verts = np.array(kw['vertices'])
     ax.scatter(*verts.T, color='k')
     if 'labels' in kw:
         for i in range(verts.shape[0]):
@@ -45,8 +52,8 @@ def vertices(ax, **kw):
 
 
 def segments(ax, **kw):
-    verts = kw['vertices']
-    segs = kw['segments']
+    verts = np.array(kw['vertices'])
+    segs = np.array(kw['segments'])
     for beg, end in segs:
         x0, y0 = verts[beg, :]
         x1, y1 = verts[end, :]
@@ -58,12 +65,13 @@ def segments(ax, **kw):
 
 
 def triangles(ax, **kw):
-    verts = kw['vertices']
+    verts = np.array(kw['vertices'])
     ax.triplot(verts[:, 0], verts[:, 1], kw['triangles'], 'ko-')
 
 
 def holes(ax, **kw):
-    ax.scatter(*kw['holes'].T, marker='x', color='r')
+    holes = np.array(kw['holes'])
+    ax.scatter(*holes.T, marker='x', color='r')
 
 
 def edges(ax, **kw):
