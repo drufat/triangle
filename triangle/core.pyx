@@ -35,6 +35,7 @@ cdef extern from "triangle.h":
         double *normlist
         int numberofedges
 
+
     void triangulate(
         char *triswitches,
         triangulateio *in_,
@@ -102,29 +103,6 @@ cdef dd(int* _0, int* _1, double** pdata, check, free_):
     return _get, _set, _free
 
 
-fields = (
-    ('pointlist', 'double'),
-    ('pointattributelist', 'double'),
-    ('pointmarkerlist', 'intc'),
-
-    ('trianglelist', 'intc'),
-    ('triangleattributelist', 'double'),
-    ('trianglearealist', 'double'),
-    ('neighborlist', 'double'),
-
-    ('segmentlist', 'intc'),
-    ('segmentmarkerlist', 'intc'),
-
-    ('holelist', 'double'),
-    ('regionlist', 'double'),
-
-    ('edgelist', 'intc'),
-    ('edgemarkerlist', 'intc'),
-    ('normlist', 'double'),
-)
-
-field_dtype = {name:dtype for name, dtype in fields}
-
 cdef _wrap(triangulateio* c):
 
     cdef int _1 = 1
@@ -159,6 +137,31 @@ cdef _wrap(triangulateio* c):
         ii(&c.numberofedges, &_1, &c.edgemarkerlist, check, True),
         dd(&c.numberofedges, &_2, &c.normlist, check, True),
     )
+
+
+fields = (
+    ('pointlist', 'double'),
+    ('pointattributelist', 'double'),
+    ('pointmarkerlist', 'intc'),
+
+    ('trianglelist', 'intc'),
+    ('triangleattributelist', 'double'),
+    ('trianglearealist', 'double'),
+    ('neighborlist', 'double'),
+
+    ('segmentlist', 'intc'),
+    ('segmentmarkerlist', 'intc'),
+
+    ('holelist', 'double'),
+    ('regionlist', 'double'),
+
+    ('edgelist', 'intc'),
+    ('edgemarkerlist', 'intc'),
+    ('normlist', 'double'),
+)
+
+
+field_dtype = {name:dtype for name, dtype in fields}
 
 
 cdef cinit(triangulateio *c):
@@ -209,14 +212,14 @@ def contig2d(value, dtype):
     return value
 
 
-cdef fin_(d, triangulateio* c):
+cdef fin(d, triangulateio* c):
     for name, dtype, _get, _set, _free in wrap(c):
         if name not in d:
             continue
         _set(d[name])
 
 
-cdef fout_(triangulateio* c, d):
+cdef fout(triangulateio* c, d):
     for name, dtype, _get, _set, _free in wrap(c):
         arr = _get()
         if arr:
@@ -224,12 +227,12 @@ cdef fout_(triangulateio* c, d):
             _free()
 
 
-def triang(__in, opts):
+def triang(_in, opts):
 
-    if ('pointlist' not in __in) or (len(__in['pointlist']) < 3):
+    if ('pointlist' not in _in) or (len(_in['pointlist']) < 3):
         raise ValueError('Input must have at least three vertices.')
 
-    _in = {name:contig2d(__in[name], field_dtype[name]) for name in __in}
+    _in = {name:contig2d(_in[name], field_dtype[name]) for name in _in}
 
     opts = opts.encode('utf-8')
 
@@ -241,12 +244,12 @@ def triang(__in, opts):
     cinit(&out_)
     cinit(&vorout_)
 
-    fin_(_in, &in_)
+    fin(_in, &in_)
 
     triangulate(opts, &in_, &out_, &vorout_)
 
     _out, _vorout = {}, {}
-    fout_(&out_, _out)
-    fout_(&vorout_, _vorout)
+    fout(&out_, _out)
+    fout(&vorout_, _vorout)
 
     return _out, _vorout
