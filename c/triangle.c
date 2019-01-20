@@ -194,6 +194,8 @@
 /*                                                                           */
 /*****************************************************************************/
 
+#include "triangle.h"
+
 /* For single precision (which will save some memory and reduce paging),     */
 /*   define the symbol SINGLE by using the -DSINGLE compiler switch or by    */
 /*   writing "#define SINGLE" below.                                         */
@@ -312,7 +314,7 @@
 /*   compiler is smarter, feel free to replace the "int" with "void".        */
 /*   Not that it matters.                                                    */
 
-#define VOID int
+// #define VOID int
 
 /* Two constants for algorithms based on random sampling.  Both constants    */
 /*   have been chosen empirically to optimize their respective algorithms.   */
@@ -646,16 +648,16 @@ struct memorypool {
 
 /* Global constants.                                                         */
 
-REAL splitter;       /* Used to split REAL factors for exact multiplication. */
-REAL epsilon;                             /* Floating-point machine epsilon. */
-REAL resulterrbound;
-REAL ccwerrboundA, ccwerrboundB, ccwerrboundC;
-REAL iccerrboundA, iccerrboundB, iccerrboundC;
-REAL o3derrboundA, o3derrboundB, o3derrboundC;
+static REAL splitter;/* Used to split REAL factors for exact multiplication. */
+static REAL epsilon;                      /* Floating-point machine epsilon. */
+static REAL resulterrbound;
+static REAL ccwerrboundA, ccwerrboundB, ccwerrboundC;
+static REAL iccerrboundA, iccerrboundB, iccerrboundC;
+static REAL o3derrboundA, o3derrboundB, o3derrboundC;
 
 /* Random number seed is not constant, but I've made it global anyway.       */
 
-unsigned long randomseed;                     /* Current random number seed. */
+static unsigned long randomseed;              /* Current random number seed. */
 
 
 /* Mesh data structure.  Triangle operates on only one mesh, but the mesh    */
@@ -932,8 +934,8 @@ struct behavior {
 
 /* Fast lookup arrays to speed some of the mesh manipulation primitives.     */
 
-int plus1mod3[3] = {1, 2, 0};
-int minus1mod3[3] = {2, 0, 1};
+static int plus1mod3[3] = {1, 2, 0};
+static int minus1mod3[3] = {2, 0, 1};
 
 /********* Primitives for triangles                                  *********/
 /*                                                                           */
@@ -5620,6 +5622,7 @@ REAL permanent;
     }
 
     if (adxtail != 0.0) {
+      axtbclen = 0;
       temp16alen = scale_expansion_zeroelim(axtbclen, axtbc, adxtail, temp16a);
       axtbctlen = scale_expansion_zeroelim(bctlen, bct, adxtail, axtbct);
       temp32alen = scale_expansion_zeroelim(axtbctlen, axtbct, 2.0 * adx,
@@ -5662,6 +5665,7 @@ REAL permanent;
       finswap = finnow; finnow = finother; finother = finswap;
     }
     if (adytail != 0.0) {
+      aytbclen = 0;
       temp16alen = scale_expansion_zeroelim(aytbclen, aytbc, adytail, temp16a);
       aytbctlen = scale_expansion_zeroelim(bctlen, bct, adytail, aytbct);
       temp32alen = scale_expansion_zeroelim(aytbctlen, aytbct, 2.0 * ady,
@@ -5759,6 +5763,7 @@ REAL permanent;
       finswap = finnow; finnow = finother; finother = finswap;
     }
     if (bdytail != 0.0) {
+      bytcalen = 0;
       temp16alen = scale_expansion_zeroelim(bytcalen, bytca, bdytail, temp16a);
       bytcatlen = scale_expansion_zeroelim(catlen, cat, bdytail, bytcat);
       temp32alen = scale_expansion_zeroelim(bytcatlen, bytcat, 2.0 * bdy,
@@ -5814,6 +5819,7 @@ REAL permanent;
     }
 
     if (cdxtail != 0.0) {
+      cxtablen = 0;
       temp16alen = scale_expansion_zeroelim(cxtablen, cxtab, cdxtail, temp16a);
       cxtabtlen = scale_expansion_zeroelim(abtlen, abt, cdxtail, cxtabt);
       temp32alen = scale_expansion_zeroelim(cxtabtlen, cxtabt, 2.0 * cdx,
@@ -5856,6 +5862,7 @@ REAL permanent;
       finswap = finnow; finnow = finother; finother = finswap;
     }
     if (cdytail != 0.0) {
+      cytablen = 0;
       temp16alen = scale_expansion_zeroelim(cytablen, cytab, cdytail, temp16a);
       cytabtlen = scale_expansion_zeroelim(abtlen, abt, cdytail, cytabt);
       temp32alen = scale_expansion_zeroelim(cytabtlen, cytabt, 2.0 * cdy,
@@ -11709,7 +11716,6 @@ vertex endpoint2;
   vertex leftvertex, rightvertex;
   vertex newvertex;
   enum insertvertexresult success;
-  enum finddirectionresult collinear;
   REAL ex, ey;
   REAL tx, ty;
   REAL etx, ety;
@@ -11778,7 +11784,7 @@ vertex endpoint2;
 
   /* Inserting the vertex may have caused edge flips.  We wish to rediscover */
   /*   the edge connecting endpoint1 to the new intersection vertex.         */
-  collinear = finddirection(m, b, splittri, endpoint1);
+  finddirection(m, b, splittri, endpoint1);
   dest(*splittri, rightvertex);
   apex(*splittri, leftvertex);
   if ((leftvertex[0] == endpoint1[0]) && (leftvertex[1] == endpoint1[1])) {
@@ -13186,14 +13192,13 @@ struct behavior *b;
 
 {
   struct osub subsegloop;
-  int dummy;
 
   traversalinit(&m->subsegs);
   subsegloop.ssorient = 0;
   subsegloop.ss = subsegtraverse(m);
   while (subsegloop.ss != (subseg *) NULL) {
     /* If the segment is encroached, add it to the list. */
-    dummy = checkseg4encroach(m, b, &subsegloop);
+    checkseg4encroach(m, b, &subsegloop);
     subsegloop.ss = subsegtraverse(m);
   }
 }
@@ -13259,7 +13264,6 @@ int triflaws;
   REAL split;
   REAL multiplier, divisor;
   int acuteorg, acuteorg2, acutedest, acutedest2;
-  int dummy;
   int i;
   triangle ptr;                     /* Temporary variable used by stpivot(). */
   subseg sptr;                        /* Temporary variable used by snext(). */
@@ -13428,9 +13432,9 @@ int triflaws;
           m->steinerleft--;
         }
         /* Check the two new subsegments to see if they're encroached. */
-        dummy = checkseg4encroach(m, b, &currentenc);
+        checkseg4encroach(m, b, &currentenc);
         snextself(currentenc);
-        dummy = checkseg4encroach(m, b, &currentenc);
+        checkseg4encroach(m, b, &currentenc);
       }
 
       badsubsegdealloc(m, encloop);

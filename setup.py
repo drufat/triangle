@@ -6,7 +6,7 @@ with open("triangle/version.py") as f:
     exec(f.read(), ns)
 
 define_macros = [
-    ('VOID', 'int'),
+    ('VOID', 'void'),
     ('REAL', 'double'),
     ('NO_TIMER', 1),
     ('TRILIBRARY', 1),
@@ -19,6 +19,7 @@ ext_modules = [
         ['c/triangle.c', 'triangle/core.c'],
         include_dirs=['c'],
         define_macros=define_macros,
+	# extra_compile_args=['-g'],
     ),
 ]
 

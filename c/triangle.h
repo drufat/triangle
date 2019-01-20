@@ -247,6 +247,8 @@
 /*  not used, `numberofsegments' will indicate the number of boundary edges. */
 /*                                                                           */
 /*****************************************************************************/
+#ifndef TRIANGLE_H
+#define TRIANGLE_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -290,3 +292,5 @@ void trifree(VOID *memptr);
 #ifdef __cplusplus
 }
 #endif
+
+#endif /* TRIANGLE_H */
