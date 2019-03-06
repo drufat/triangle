@@ -14,6 +14,8 @@ terms = (
     ('holelist', 'holes'),
 
     ('regionlist', 'regions'),
+
+    ('neighborlist', 'neighbors'),
 )
 
 translate_frw = {_0: _1 for _0, _1 in terms}
