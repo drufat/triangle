@@ -1,6 +1,6 @@
 from setuptools import setup, Extension
 
-version = '20190115.2'
+version = '20190115.3'
 
 define_macros = [
     ('VOID', 'void'),
