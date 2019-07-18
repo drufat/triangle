@@ -23,3 +23,8 @@ To do the same with a circle
 
 .. plot:: plot/ex5.py
     :include-source:
+
+To add a hole in the middle of the circle
+
+.. plot:: plot/ex6.py
+    :include-source:

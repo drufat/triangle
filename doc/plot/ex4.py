@@ -3,8 +3,9 @@ import numpy as np
 
 import triangle as tr
 
-theta = np.linspace(0, 2 * np.pi, 33)[:-1]
-pts = np.vstack((np.cos(theta), np.sin(theta))).T
+N = 32
+theta = np.linspace(0, 2 * np.pi, N, endpoint=False)
+pts = np.stack([np.cos(theta), np.sin(theta)], axis=1)
 A = dict(vertices=pts)
 B = tr.triangulate(A, 'q')
 tr.compare(plt, A, B)
