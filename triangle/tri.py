@@ -47,6 +47,7 @@ def triangulate(tri, opts=''):
     * `l` - Uses only vertical cuts in the divide-and-conquer algorithm. By default, Triangle uses alternating vertical and horizontal cuts, which usually improve the speed except with vertex sets that are small or short and wide. This switch is primarily of theoretical interest.
     * `s` - Specifies that segments should be forced into the triangulation by recursively splitting them at their midpoints, rather than by generating a constrained Delaunay triangulation. Segment splitting is true to Ruppert's original algorithm, but can create needlessly small triangles. This switch is primarily of theoretical interest.
     * `C` - Check the consistency of the final mesh. Uses exact arithmetic for checking, even if the -X switch is used. Useful if you suspect Triangle is buggy.
+    * `n` - Return neighbor list in dict key 'neighbors'
     
     >>> v = [[0, 0], [0, 1], [1, 1], [1, 0]]
     >>> t = triangulate({'vertices': v}, 'a0.2')
