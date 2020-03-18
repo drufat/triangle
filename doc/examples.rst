@@ -28,3 +28,9 @@ To add a hole in the middle of the circle
 
 .. plot:: plot/ex6.py
     :include-source:
+
+To triangulate with region attributes
+
+.. plot:: plot/ex7.py
+    :include-source:
+

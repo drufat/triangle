@@ -34,6 +34,10 @@ def plot(ax, **kw):
         holes(ax, **kw)
     if 'edges' in kw:
         edges(ax, **kw)
+    if 'regions' in kw:
+        regions(ax, **kw)
+    if 'triangle_attributes' in kw:
+        triangle_attributes(ax, **kw)
 
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
@@ -101,3 +105,24 @@ def edges(ax, **kw):
             linewidth=.5,
         )
     ax.axis(lim)  # make sure figure is not rescaled by ifinite ray
+
+def regions(ax, **kw):
+    """
+    Plot regions labeled by region
+    """
+    regions = np.array(kw['regions'])
+    ax.scatter(regions[:,0], regions[:,1], marker='*', color='b')
+    for x, y, r, _ in regions:
+        ax.text(x, y, ' {:g}'.format(r), color='b', va='center')
+
+def triangle_attributes(ax, **kw):
+    """
+    Plot triangle attributes labeled by region
+    """
+    verts = np.array(kw['vertices'])
+    tris = np.array(kw['triangles'])
+    attrs = np.array(kw['triangle_attributes']).flatten()
+    centroids = verts[tris].mean(axis=1)
+    ax.scatter(centroids[:,0], centroids[:,1], marker='.', color='m', zorder=1)
+    for (x, y), r in zip(centroids, attrs):
+        ax.text(x, y, ' {:g}'.format(r), color='m', zorder=1, va='center')

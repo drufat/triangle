@@ -7,6 +7,7 @@ terms = (
 
     ('trianglelist', 'triangles'),
     ('trianglearealist', 'triangle_max_area'),
+    ('triangleattributelist', 'triangle_attributes'),
 
     ('segmentlist', 'segments'),
     ('segmentmarkerlist', 'segment_markers'),
