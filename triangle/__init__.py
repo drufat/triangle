@@ -1,4 +1,4 @@
-__version__ = __import__('pkg_resources').get_distribution('triangle').version
+__version__ = '20190115.3'
 
 from triangle.data import (
     loads, load, get_data, show_data,
