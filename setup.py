@@ -1,6 +1,8 @@
 from setuptools import setup, Extension
 
-version = '20190115.3'
+version = {}
+with open('triangle/version.py') as f:
+    exec(f.read(), version)
 
 define_macros = [
     ('VOID', 'void'),
@@ -22,7 +24,7 @@ ext_modules = [
 
 setup(
     name='triangle',
-    version=version,
+    version=version['__version__'],
     description='Python binding to the triangle library',
     author='Dzhelil Rufat',
     author_email='d@rufat.be',

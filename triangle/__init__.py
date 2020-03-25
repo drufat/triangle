@@ -1,5 +1,6 @@
-__version__ = '20190115.3'
-
+from triangle.version import (
+    __version__,
+)
 from triangle.data import (
     loads, load, get_data, show_data,
 )
