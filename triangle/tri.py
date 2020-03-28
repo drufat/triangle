@@ -17,6 +17,9 @@ terms = (
     ('regionlist', 'regions'),
 
     ('neighborlist', 'neighbors'),
+    
+    ('edgelist', 'edges'),
+    ('edgemarkerlist', 'edgemarkers'),
 )
 
 translate_frw = {_0: _1 for _0, _1 in terms}
@@ -49,6 +52,7 @@ def triangulate(tri, opts=''):
     * `s` - Specifies that segments should be forced into the triangulation by recursively splitting them at their midpoints, rather than by generating a constrained Delaunay triangulation. Segment splitting is true to Ruppert's original algorithm, but can create needlessly small triangles. This switch is primarily of theoretical interest.
     * `C` - Check the consistency of the final mesh. Uses exact arithmetic for checking, even if the -X switch is used. Useful if you suspect Triangle is buggy.
     * `n` - Return neighbor list in dict key 'neighbors'
+    * `e` - Return edge list in dict key 'edges'
     
     >>> v = [[0, 0], [0, 1], [1, 1], [1, 0]]
     >>> t = triangulate({'vertices': v}, 'a0.2')
