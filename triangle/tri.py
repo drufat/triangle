@@ -19,7 +19,7 @@ terms = (
     ('neighborlist', 'neighbors'),
     
     ('edgelist', 'edges'),
-    ('edgemarkerlist', 'edgemarkers'),
+    ('edgemarkerlist', 'edge_markers'),
 )
 
 translate_frw = {_0: _1 for _0, _1 in terms}
