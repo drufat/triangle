@@ -1,4 +1,4 @@
-from triangle.core import triang
+from .core import triang
 
 terms = (
     ('pointlist', 'vertices'),
