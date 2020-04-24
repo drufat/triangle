@@ -3,6 +3,10 @@ name: Build Wheels
 on: [push, pull_request]
 
 jobs:
+  env:
+    CIBW_TEST_REQUIRES: pytest
+    CIBW_TEST_COMMAND: "pytest --doctest-module triangle/tri.py"
+
   build_wheels:
     name: Build wheel on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
