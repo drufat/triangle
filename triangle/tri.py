@@ -1,23 +1,24 @@
 from .core import triang
 
 terms = (
+    # points
     ('pointlist', 'vertices'),
     ('pointattributelist', 'vertex_attributes'),
     ('pointmarkerlist', 'vertex_markers'),
-
+    # triangles
     ('trianglelist', 'triangles'),
     ('trianglearealist', 'triangle_max_area'),
     ('triangleattributelist', 'triangle_attributes'),
-
+    # segments
     ('segmentlist', 'segments'),
     ('segmentmarkerlist', 'segment_markers'),
-
+    # holes
     ('holelist', 'holes'),
-
+    # regions
     ('regionlist', 'regions'),
-
+    # neighbors
     ('neighborlist', 'neighbors'),
-    
+    # edges
     ('edgelist', 'edges'),
     ('edgemarkerlist', 'edge_markers'),
 )

@@ -13,17 +13,16 @@ def split(tup, pos):
 
 
 def loads(
-        node=None,
-        ele=None,
-        poly=None,
-        area=None,
-        edge=None,
-        neigh=None
+    node=None,
+    ele=None,
+    poly=None,
+    area=None,
+    edge=None,
+    neigh=None,
 ):
     """
     Load a dictionary representing the triangle data from strings.
     """
-
     class var:
         start_at_zero = True
 
@@ -35,16 +34,25 @@ def loads(
         if N_vertices == 0:
             return tokens
 
-        head, tokens = split(tokens, N_vertices * (1 + dim + N_attr + N_bnd_markers))
+        head, tokens = split(
+            tokens,
+            N_vertices * (1 + dim + N_attr + N_bnd_markers),
+        )
         v = np.array(head).reshape(-1, 1 + dim + N_attr + N_bnd_markers)
         # check if starting at zero or one
 
         var.start_at_zero = (v[0, 0] == '0')
         data['vertices'] = np.array(v[:, 1:3], dtype='double')
         if N_attr > 0:
-            data['vertex_attributes'] = np.array(v[:, 3:3 + N_attr], dtype='double')
+            data['vertex_attributes'] = np.array(
+                v[:, 3:3 + N_attr],
+                dtype='double',
+            )
         if N_bnd_markers > 0:
-            data['vertex_markers'] = np.array(v[:, 3 + N_attr:3 + N_attr + N_bnd_markers], dtype='intc')
+            data['vertex_markers'] = np.array(
+                v[:, 3 + N_attr:3 + N_attr + N_bnd_markers],
+                dtype='intc',
+            )
 
         return tokens
 
@@ -60,7 +68,10 @@ def loads(
         if not var.start_at_zero:
             data['triangles'] -= 1
         if N_attr > 0:
-            data['triangle_attributes'] = np.array(v[:, N_nodes + 1:N_nodes + 1 + N_attr], dtype='double')
+            data['triangle_attributes'] = np.array(
+                v[:, N_nodes + 1:N_nodes + 1 + N_attr],
+                dtype='double',
+            )
 
         return tokens
 
@@ -76,7 +87,10 @@ def loads(
         if not var.start_at_zero:
             data['segments'] -= 1
         if N_bnd_markers > 0:
-            data['segment_markers'] = np.array(v[:, 3:3 + N_bnd_markers], dtype='intc')
+            data['segment_markers'] = np.array(
+                v[:, 3:3 + N_bnd_markers],
+                dtype='intc',
+            )
 
         return tokens
 
@@ -134,7 +148,11 @@ def loads(
         v = np.array(head).reshape(-1, 4)
         regs = np.array(v[:, 1:4], dtype='double')
         # add an extra column to make fields equal to 4
-        regs = np.hstack((regs[:, 0:2], np.zeros((regs.shape[0], 1)), regs[:, 2:3]))
+        regs = np.hstack((
+            regs[:, 0:2],
+            np.zeros((regs.shape[0], 1)),
+            regs[:, 2:3],
+        ))
         data['regions'] = regs
 
     def _neigh(tokens):

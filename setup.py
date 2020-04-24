@@ -30,14 +30,16 @@ setup(
     author_email='d@rufat.be',
     url='https://rufat.be/triangle',
     packages=['triangle'],
-    package_data={'triangle': [
-        'data/*.node',
-        'data/*.ele',
-        'data/*.poly',
-        'data/*.area',
-        'data/*.edge',
-        'data/*.neigh',
-    ]},
+    package_data={
+        'triangle': [
+            'data/*.node',
+            'data/*.ele',
+            'data/*.poly',
+            'data/*.area',
+            'data/*.edge',
+            'data/*.neigh',
+        ]
+    },
     install_requires=[
         'numpy',
     ],

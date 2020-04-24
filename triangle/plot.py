@@ -62,9 +62,12 @@ def segments(ax, **kw):
         x0, y0 = verts[beg, :]
         x1, y1 = verts[end, :]
         ax.fill(
-            [x0, x1], [y0, y1],
-            facecolor='none', edgecolor='r',
-            linewidth=3, zorder=0,
+            [x0, x1],
+            [y0, y1],
+            facecolor='none',
+            edgecolor='r',
+            linewidth=3,
+            zorder=0,
         )
 
 
@@ -87,7 +90,13 @@ def edges(ax, **kw):
     for beg, end in edges:
         x0, y0 = verts[beg, :]
         x1, y1 = verts[end, :]
-        ax.fill([x0, x1], [y0, y1], facecolor='none', edgecolor='k', linewidth=.5)
+        ax.fill(
+            [x0, x1],
+            [y0, y1],
+            facecolor='none',
+            edgecolor='k',
+            linewidth=.5,
+        )
 
     if ('ray_origins' not in kw) or ('ray_directions' not in kw):
         return
@@ -100,20 +109,24 @@ def edges(ax, **kw):
         scale = 100.0  # some large number
         x1, y1 = x0 + scale * vx, y0 + scale * vy
         ax.fill(
-            [x0, x1], [y0, y1],
-            facecolor='none', edgecolor='k',
+            [x0, x1],
+            [y0, y1],
+            facecolor='none',
+            edgecolor='k',
             linewidth=.5,
         )
     ax.axis(lim)  # make sure figure is not rescaled by ifinite ray
+
 
 def regions(ax, **kw):
     """
     Plot regions labeled by region
     """
     regions = np.array(kw['regions'])
-    ax.scatter(regions[:,0], regions[:,1], marker='*', color='b')
+    ax.scatter(regions[:, 0], regions[:, 1], marker='*', color='b')
     for x, y, r, _ in regions:
         ax.text(x, y, ' {:g}'.format(r), color='b', va='center')
+
 
 def triangle_attributes(ax, **kw):
     """
@@ -123,6 +136,12 @@ def triangle_attributes(ax, **kw):
     tris = np.array(kw['triangles'])
     attrs = np.array(kw['triangle_attributes']).flatten()
     centroids = verts[tris].mean(axis=1)
-    ax.scatter(centroids[:,0], centroids[:,1], marker='.', color='m', zorder=1)
+    ax.scatter(
+        centroids[:, 0],
+        centroids[:, 1],
+        marker='.',
+        color='m',
+        zorder=1,
+    )
     for (x, y), r in zip(centroids, attrs):
         ax.text(x, y, ' {:g}'.format(r), color='m', zorder=1, va='center')
