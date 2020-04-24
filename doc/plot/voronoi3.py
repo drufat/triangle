@@ -10,8 +10,11 @@ vertices, edges, ray_origins, ray_directions = tr.voronoi(pts)
 ax = plt.axes()
 tr.plot(ax, vertices=pts)
 lim = ax.axis()
-tr.plot(ax, vertices=vertices, edges=edges,
-        ray_origins=ray_origins, ray_directions=ray_directions)
+tr.plot(ax,
+        vertices=vertices,
+        edges=edges,
+        ray_origins=ray_origins,
+        ray_directions=ray_directions)
 ax.axis(lim)
 
 plt.show()
