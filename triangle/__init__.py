@@ -1,13 +1,13 @@
-from triangle.version import (
+from .version import (
     __version__,
 )
-from triangle.data import (
+from .data import (
     loads, load, get_data, show_data,
 )
-from triangle.plot import (
+from .plot import (
     plot, comparev, compare,
 )
-from triangle.tri import (
+from .tri import (
     triangulate,
     convex_hull, delaunay, voronoi,
 )
