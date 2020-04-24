@@ -29,17 +29,16 @@ jobs:
         choco install vcpython27 -f -y
     - name: Build wheel
       run: |
-        python -m cibuildwheel --output-dir wheelhouse
+        python -m cibuildwheel --output-dir dist
     - uses: actions/upload-artifact@v1
       with:
         name: wheels
-        path: ./wheelhouse
-    - name: Upload To PyPi
+        path: dist/
+    - name: Upload To PyPI
+      if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
       env:
-        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
-        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
-      # TODO : remove `if false` statement after secrets are set in Github UI
-      if: false
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.pypi_github_triangle }}
       run: |
         pip install twine
-        twine upload ./wheelhouse/*
+        twine upload dist/*
