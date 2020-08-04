@@ -361,6 +361,7 @@
 #include <fpu_control.h>
 #endif /* LINUX */
 #ifdef TRILIBRARY
+#include <setjmp.h>
 #include "triangle.h"
 #endif /* TRILIBRARY */
 
@@ -1405,9 +1406,17 @@ int triunsuitable(vertex triorg, vertex tridest, vertex triapex, REAL area)
 /**                                                                         **/
 /**                                                                         **/
 
+#ifdef TRILIBRARY
+static jmp_buf buf;
+#endif /* TRILIBRARY */
+
 void triexit(int status)
 {
+  #ifdef TRILIBRARY
+  longjmp(buf, status);
+  #else /* not TRILIBRARY */
   exit(status);
+  #endif /* not TRILIBRARY */
 }
 
 VOID *trimalloc(int size)
@@ -11054,7 +11063,8 @@ void segmentintersection(struct mesh *m, struct behavior *b,
              (rightvertex[1] != endpoint1[1])) {
     printf("Internal error in segmentintersection():\n");
     printf("  Topological inconsistency after splitting a segment.\n");
-    internalerror();
+    longjmp(buf, 1);
+    //internalerror();
   }
   /* `splittri' should have destination endpoint1. */
 }
@@ -14565,7 +14575,7 @@ void statistics(struct mesh *m, struct behavior *b)
 /*****************************************************************************/
 
 #ifdef TRILIBRARY
-void triangulate(char *triswitches, struct triangulateio *in,
+void intern_triangulate(char *triswitches, struct triangulateio *in,
                  struct triangulateio *out, struct triangulateio *vorout)
 #else /* not TRILIBRARY */
 int main(int argc, char **argv)
@@ -14887,3 +14897,18 @@ int main(int argc, char **argv)
   return 0;
 #endif /* not TRILIBRARY */
 }
+
+#ifdef TRILIBRARY
+// wrapper for exception handling
+int triangulate(char *triswitches, struct triangulateio *in,
+                 struct triangulateio *out, struct triangulateio *vorout)
+{
+  int errno;
+  if (!(errno = setjmp(buf))) {
+    intern_triangulate(triswitches, in, out, vorout);
+    return 0;
+  } else {
+    return errno;
+  }
+}
+#endif /* TRILIBRARY */

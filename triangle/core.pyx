@@ -36,7 +36,7 @@ cdef extern from "triangle.h":
         int numberofedges
 
 
-    void triangulate(
+    int triangulate(
         char *triswitches,
         triangulateio *in_,
         triangulateio *out_,
@@ -246,7 +246,8 @@ def triang(_in, opts):
 
     fin(_in, &in_)
 
-    triangulate(opts, &in_, &out_, &vorout_)
+    if triangulate(opts, &in_, &out_, &vorout_) != 0:
+        raise RuntimeError('Triangulation failed -- probably because of invalid geometry on input.')
 
     _out, _vorout = {}, {}
     fout(&out_, _out)
