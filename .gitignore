@@ -3,6 +3,7 @@
 
 .eggs/
 build/
+dist/
 triangle.egg-info/
 
 .plot
