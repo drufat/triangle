@@ -24,7 +24,7 @@ jobs:
         python -m cibuildwheel --output-dir dist
       env:
         # some builds fail due to numpy issue
-        CIBW_SKIP: pp* cp36-* cp39-macosx* cp311-*
+        CIBW_SKIP: cp36-* pp* *musllinux*
         CIBW_TEST_REQUIRES: pytest
         CIBW_TEST_COMMAND: 'pytest {project}/tests'
     - uses: actions/upload-artifact@v1
