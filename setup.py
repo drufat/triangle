@@ -1,8 +1,5 @@
 from setuptools import setup, Extension
 
-version = {}
-with open('triangle/version.py') as f:
-    exec(f.read(), version)
 
 define_macros = [
     ('VOID', 'void'),
@@ -22,26 +19,8 @@ ext_modules = [
     ),
 ]
 
+# see pyproject.toml for other metadata
 setup(
     name='triangle',
-    version=version['__version__'],
-    description='Python binding to the triangle library',
-    author='Dzhelil Rufat',
-    author_email='d@rufat.be',
-    url='https://rufat.be/triangle',
-    packages=['triangle'],
-    package_data={
-        'triangle': [
-            'data/*.node',
-            'data/*.ele',
-            'data/*.poly',
-            'data/*.area',
-            'data/*.edge',
-            'data/*.neigh',
-        ]
-    },
-    install_requires=[
-        'numpy',
-    ],
     ext_modules=ext_modules,
 )

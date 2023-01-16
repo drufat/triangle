@@ -9,4 +9,4 @@ or build from source::
 
    git clone https://github.com/drufat/triangle.git 
    cd triangle 
-   python setup.py install
+   pip install .
