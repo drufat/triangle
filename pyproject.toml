@@ -1,52 +1,52 @@
 [build-system]
 requires = [
-    "Cython >=3.0.2",
-    "setuptools >=61",
+    'Cython >=3.0.2',
+    'setuptools >=61',
 ]
-build-backend = "setuptools.build_meta"
+build-backend = 'setuptools.build_meta'
 
 [project]
-name = "triangle"
-dynamic = ["version"]
+name = 'triangle'
+dynamic = ['version']
 authors = [
-    {name = "Dzhelil Rufat", email = "d@rufat.be"},
+    { name = 'Dzhelil Rufat', email = 'd@rufat.be' },
 ]
-description = "Python binding to the triangle library"
-readme = "README.rst"
-license = {text = "LGPL-3.0"}
-requires-python = ">=3.7"
+description = 'Python binding to the triangle library'
+readme = 'README.rst'
+license = { text = 'LGPL-3.0' }
+requires-python = '>=3.7'
 dependencies = [
-    "numpy",
+    'numpy',
 ]
 
 [project.optional-dependencies]
 test = [
-    "pytest",
+    'pytest',
 ]
 
 [project.urls]
-Homepage = "https://rufat.be/triangle"
-Repository = "https://github.com/drufat/triangle"
+Homepage = 'https://rufat.be/triangle'
+Repository = 'https://github.com/drufat/triangle'
 
 [tool.setuptools]
 include-package-data = false
-packages = ["triangle"]
+packages = ['triangle']
 
 [tool.setuptools.dynamic]
-version = {attr = "triangle.version.__version__"}
+version = { attr = 'triangle.version.__version__' }
 
 [tool.setuptools.package-data]
 triangle = [
-    "data/*.node",
-    "data/*.ele",
-    "data/*.poly",
-    "data/*.area",
-    "data/*.edge",
-    "data/*.neigh",
+    'data/*.node',
+    'data/*.ele',
+    'data/*.poly',
+    'data/*.area',
+    'data/*.edge',
+    'data/*.neigh',
 ]
 
 [tool.cibuildwheel]
-skip = ["pp*", "*musllinux*"]
-test-skip = ["*-manylinux_i686"]
-test-requires = "pytest"
-test-command = "pytest {project}/tests"
+skip = ['pp*', '*musllinux*']
+test-skip = ['*-manylinux_i686']
+test-requires = 'pytest'
+test-command = 'pytest {project}/tests'
