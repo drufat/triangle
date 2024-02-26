@@ -6,7 +6,7 @@ requires = [
 build-backend = 'setuptools.build_meta'
 
 [project]
-name = 'triangle'
+name = 'triangle2'
 dynamic = ['version']
 authors = [
     { name = 'Dzhelil Rufat', email = 'd@rufat.be' },

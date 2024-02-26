@@ -21,6 +21,6 @@ ext_modules = [
 
 # see pyproject.toml for other metadata
 setup(
-    name='triangle',
+    name='triangle2',
     ext_modules=ext_modules,
 )
